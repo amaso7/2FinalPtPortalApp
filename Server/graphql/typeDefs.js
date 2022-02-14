@@ -9,6 +9,14 @@ module.exports = gql`
     imageUrl: String
     latestMessage: Message
   }
+  type DrUser {
+    drusername: String!
+    email: String
+    createdAt: String!
+    token: String
+    imageUrl: String
+    latestMessage: Message
+  }
   type Message {
     uuid: String!
     content: String!
@@ -26,12 +34,20 @@ module.exports = gql`
   }
   type Query {
     getUsers: [User]!
+    getDrUsers: [DrUser]!
     login(username: String!, password: String!): User!
+    drlogin(drusername: String!, password: String!): DrUser!
     getMessages(from: String!): [Message]!
   }
   type Mutation {
     register(
       username: String!
+      email: String!
+      password: String!
+      confirmPassword: String!
+    ): User!,
+    registerDr(
+      drusername: String!
       email: String!
       password: String!
       confirmPassword: String!

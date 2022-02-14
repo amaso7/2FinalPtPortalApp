@@ -1,7 +1,8 @@
 const userResolvers = require('./users')
 const messageResolvers = require('./messages')
+const druserResolvers = require('./drUsers')
+const { User, Message, DrUser } = require('../../models')
 
-const { User, Message } = require('../../models')
 
 module.exports = {
   Message: {
@@ -18,11 +19,16 @@ module.exports = {
   User: {
     createdAt: (parent) => parent.createdAt.toISOString(),
   },
+  DrUser: {
+    createdAt: (parent) => parent.createdAt.toISOString(),
+  },
   Query: {
+    ...druserResolvers.Query,
     ...userResolvers.Query,
     ...messageResolvers.Query,
   },
   Mutation: {
+    ...druserResolvers.Mutation,
     ...userResolvers.Mutation,
     ...messageResolvers.Mutation,
   },

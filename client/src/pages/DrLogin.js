@@ -65,6 +65,10 @@ export default function DrLogin(props) {
       <small>
         Don't have an account? <Link to="/drregister">Provider Register</Link>
       </small>
+<br />
+      <small>
+        If you are a Patient, click here! <Link to="/login">Patient Login</Link>
+      </small>
 </div>
 </Form>
 </Col>
