@@ -1,0 +1,110 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-float infinite 3s ease-in-out;
+    }
+  }
+  
+  .App-header {
+    min-height: 30vh;
+    color:antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    background-color: #0084ff;
+    background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg");
+  }
+  
+  .App-link {
+    color: rgb(112, 76, 182);
+  }
+  
+  @keyframes App-logo-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  .hlink{
+    display: grid;
+    background: linear-gradient(40deg,#78b7d6a3, transparent);
+  }
+  .crisissite{
+    display: grid;
+    background: linear-gradient(40deg,#78b7d6a3, transparent);
+  }
+  .hotline{
+    display: grid;
+    background: linear-gradient(40deg,#78b7d6a3, transparent);
+  }
+  .menu{
+    display: grid;
+    background: linear-gradient(40deg,#78b7d6a3, transparent);
+  }
+  .buttonpt{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:#4b4e50;
+    text-align:center;
+    transition: all 0.2s;
+    }
+  .buttonpt:hover{
+    background-color:#4095c6;
+    }
+    @media all and (max-width:30em){
+     a.button3{
+    display:block;
+    margin:0.2em auto;
+    }
+  }
+  .buttondr{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:#4b4e50;
+    text-align:center;
+    transition: all 0.2s;
+    }
+    #ptPortal{
+      background-color: antiquewhite;
+      text-align: center;
+      text-size-adjust: auto;
+    }
+  .buttondr:hover{
+    background-color:#4095c6;
+    }
+    
+    @media all and (max-width:30em){
+     a.button3{
+    display:block;
+    margin:0.2em auto;
+    }
+  }  
