@@ -93,7 +93,7 @@
     text-align:center;
     transition: all 0.2s;
     }
-    #ptPortal{
+    .ptmsg{
       background-color: antiquewhite;
       text-align: center;
       text-size-adjust: auto;

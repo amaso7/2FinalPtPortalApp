@@ -113,12 +113,21 @@ export default function Messages() {
         <Form onSubmit={submitMessage}>
           <Form.Group className="d-flex align-items-center m-0">
             <Form.Control
-              type="text"
+            
+              type="form"
               className="message-input rounded-pill p-4 bg-secondary border-0"
               placeholder="Type a message.."
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
+            <Form.Control
+            
+            type="date"
+            className="message-input rounded-pill p-4 bg-secondary border-0"
+            placeholder="Enter you DOB"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
             <i
               className="fas fa-paper-plane fa-2x text-primary ml-2"
               onClick={submitMessage}

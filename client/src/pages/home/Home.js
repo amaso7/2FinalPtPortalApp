@@ -94,12 +94,7 @@ export default function Home({ history }) {
   return (
     <Fragment>
       <Row>
-        <Link to="/login">
-          <Button variant="link">Login</Button>
-        </Link>
-        <Link to="/register">
-          <Button variant="link">Register</Button>
-        </Link>
+
         <Link to="/Ptpg" component={PtPg}></Link>
         <Button variant="link" onClick={logout}>
           Logout
