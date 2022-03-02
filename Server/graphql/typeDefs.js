@@ -45,13 +45,13 @@ module.exports = gql`
       email: String!
       password: String!
       confirmPassword: String!
-    ): User!,
+    ): User!
     registerDr(
       drusername: String!
       email: String!
       password: String!
       confirmPassword: String!
-    ): User!
+    ): DrUser!
     sendMessage(to: String!, content: String!): Message!
     reactToMessage(uuid: String!, content: String!): Reaction!
   }
