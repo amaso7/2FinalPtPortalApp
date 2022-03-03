@@ -6,7 +6,7 @@ import { gql, useSubscription } from '@apollo/client'
 import { useAuthDispatch, useAuthState } from '../../context/auth'
 import { useMessageDispatch } from '../../context/message'
 
-import Users from './Users'
+import DrUsers from './Users'
 import Messages from './Messages'
 import PtPg from './Ptpg'
 const NEW_MESSAGE = gql`
@@ -101,7 +101,7 @@ export default function Home({ history }) {
         </Button>
       </Row>
       <Row className="bg-white">
-        <Users />
+        <DrUsers />
         <Messages />
       </Row>
     </Fragment>

@@ -31,11 +31,12 @@ module.exports = gql`
     createdAt: String!
     message: Message!
     user: User!
+    druser: DrUser!
   }
   type Query {
     getUsers: [User]!
-    getDrUsers: [DrUser]!
     login(username: String!, password: String!): User!
+    getDrUsers: [DrUser]!
     drlogin(drusername: String!, password: String!): DrUser!
     getMessages(from: String!): [Message]!
   }

@@ -8,23 +8,23 @@ const { JWT_SECRET } = require('../../config/env.json')
 
 module.exports = {
   Query: {
-    getDrUsers: async (_, __, { druser }) => {
+    getDrUsers: async (_, __, { drUser }) => {
       try {
-        if (!druser) throw new AuthenticationError('Unauthenticated')
+        if (!drUser) throw new AuthenticationError('Unauthenticated')
 
-        let drusers = await DrUser.findAll({
+        let drUsers = await DrUser.findAll({
           attributes: ['drusername', 'imageUrl', 'createdAt'],
-          where: { drusername: { [Op.ne]: druser.drusername } },
+          where: { drusername: { [Op.ne]: drUser.drusername } },
         })
 
         const allDrUserMessages = await Message.findAll({
           where: {
-            [Op.or]: [{ from: druser.drusername }, { to: druser.drusername }],
+            [Op.or]: [{ from: drUser.drusername }, { to: drUser.drusername }],
           },
           order: [['createdAt', 'DESC']],
         })
 
-        drusers = drusers.map((otherDrUser) => {
+        drUsers = drUsers.map((otherDrUser) => {
           const latestMessage = allDrUserMessages.find(
             (m) => m.from === otherDrUser.drusername || m.to === otherDrUser.drusername
           )
@@ -32,7 +32,7 @@ module.exports = {
           return otherDrUser
         })
 
-        return drusers
+        return drUsers
       } catch (err) {
         console.log(err)
         throw err
@@ -113,15 +113,15 @@ module.exports = {
         // Hash password
         password = await bcrypt.hash(password, 6)
 
-        // Create user
-        const druser = await DrUser.create({
+        // Create druser
+        const drUser = await DrUser.create({
           drusername,
           email,
           password,
         })
 
-        // Return user
-        return druser
+        // Return druser
+        return drUser
       } catch (err) {
         console.log(err)
         if (err.name === 'SequelizeUniqueConstraintError') {

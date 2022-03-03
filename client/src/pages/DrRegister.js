@@ -3,44 +3,44 @@ import { Row, Col, Form, Button } from 'react-bootstrap'
 import { gql, useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom'
 
-const REGISTER_USER = gql`
-  mutation register(
-    $username: String!
+const REGISTER_DRUSER = gql`
+  mutation registerDr(
+    $drusername: String!
     $email: String!
     $password: String!
     $confirmPassword: String!
   ) {
-    register(
-      username: $username
+    registerDr(
+      drusername: $drusername
       email: $email
       password: $password
       confirmPassword: $confirmPassword
     ) {
-      username
+      drusername
       email
       createdAt
     }
   }
 `
 
-export default function DrRegister(props) {
+export default function RegisterDr(props) {
   const [variables, setVariables] = useState({
     email: '',
-    username: '',
+    drusername: '',
     password: '',
     confirmPassword: '',
   })
   const [errors, setErrors] = useState({})
 
-  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-    update: (_, __) => props.history.push('/login'),
+  const [registerDrUser, { loading }] = useMutation(REGISTER_DRUSER, {
+    update: (_, __) => props.history.push('/drlogin'),
     onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
   })
 
   const submitRegisterForm = (e) => {
     e.preventDefault()
 
-    registerUser({ variables })
+    registerDrUser({ variables })
   }
 
   return (
@@ -59,9 +59,9 @@ export default function DrRegister(props) {
   </Form.Text>
 </Form.Group>
 <Form.Group >
-<Form.Label className={errors.username && 'text-danger'}>{errors.username ?? 'Username'}</Form.Label>
-  <Form.Control type="text" placeholder="Enter Username" value={variables.username} className={errors.username && 'is-invalid'} onChange={(e) => 
-    setVariables({...variables,username: e.target.value}) } />
+<Form.Label className={errors.drusername && 'text-danger'}>{errors.drusername ?? 'Username'}</Form.Label>
+  <Form.Control type="text" placeholder="Enter Username" value={variables.drusername} className={errors.drusername && 'is-invalid'} onChange={(e) => 
+    setVariables({...variables,drusername: e.target.value}) } />
 </Form.Group>
 <Form.Group >
 <Form.Label className={errors.password && 'text-danger'}>{errors.password ?? 'Password'}</Form.Label>

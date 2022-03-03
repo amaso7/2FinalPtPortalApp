@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 
 import { useAuthDispatch } from '../context/auth'
 
-const LOGIN_USER = gql`
-  query login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      username
+const LOGIN_DRUSER = gql`
+  query drlogin($drusername: String!, $password: String!) {
+    drlogin(drusername: $drusername, password: $password) {
+      drusername
       email
       createdAt
       token
@@ -18,17 +18,17 @@ const LOGIN_USER = gql`
 
 export default function DrLogin(props) {
   const [variables, setVariables] = useState({
-    username: '',
+    drusername: '',
     password: '',
   })
   const [errors, setErrors] = useState({})
 
   const dispatch = useAuthDispatch()
 
-  const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
+  const [loginDrUser, { loading }] = useLazyQuery(LOGIN_DRUSER, {
     onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
     onCompleted(data) {
-      dispatch({ type: 'LOGIN', payload: data.login })
+      dispatch({ type: 'DRLOGIN', payload: data.drlogin })
       window.location.href = '/drHome'
     },
   })
@@ -36,7 +36,7 @@ export default function DrLogin(props) {
   const submitLoginForm = (e) => {
     e.preventDefault()
 
-    loginUser({ variables })
+    loginDrUser({ variables })
   }
 
   return ( <Row className=" py-5 justify-content-center">
@@ -47,9 +47,9 @@ export default function DrLogin(props) {
     <Form onSubmit={submitLoginForm}>
 
 <Form.Group >
-<Form.Label className={errors.username && 'text-danger'}>{errors.username ?? 'Username'}</Form.Label>
-<Form.Control type="text" placeholder="Enter Username" value={variables.username} className={errors.username && 'is-invalid'} onChange={(e) => 
-  setVariables({...variables,username: e.target.value}) } />
+<Form.Label className={errors.drusername && 'text-danger'}>{errors.drusername ?? 'Username'}</Form.Label>
+<Form.Control type="text" placeholder="Enter Username" value={variables.drusername} className={errors.drusername && 'is-invalid'} onChange={(e) => 
+  setVariables({...variables,drusername: e.target.value}) } />
 </Form.Group>
 <Form.Group >
 <Form.Label className={errors.password && 'text-danger'}>{errors.password ?? 'Password'}</Form.Label>

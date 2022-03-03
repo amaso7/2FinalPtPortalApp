@@ -15,6 +15,10 @@ module.exports = {
       await User.findByPk(parent.userId, {
         attributes: ['username', 'imageUrl', 'createdAt'],
       }),
+      druser: async (parent) =>
+      await DrUser.findByPk(parent.druserId, {
+        attributes: ['drusername', 'imageUrl', 'createdAt'],
+      }),
   },
   User: {
     createdAt: (parent) => parent.createdAt.toISOString(),
