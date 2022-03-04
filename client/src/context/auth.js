@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode'
 const AuthStateContext = createContext()
 const AuthDispatchContext = createContext()
 
+let druser = null
 let user = null
 const token = localStorage.getItem('token')
 if (token) {
@@ -16,6 +17,16 @@ if (token) {
     user = decodedToken
   }
 } else console.log('No token found')
+if (token) {
+  const decodedToken = jwtDecode(token)
+  const expiresAt = new Date(decodedToken.exp * 1000)
+
+  if (new Date() > expiresAt) {
+    localStorage.removeItem('token')
+  } else {
+    druser = decodedToken
+  }
+} else console.log('No token found')
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -24,12 +35,14 @@ const authReducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
+        druser: action.payload
       }
     case 'LOGOUT':
       localStorage.removeItem('token')
       return {
         ...state,
         user: null,
+        druser: null
       }
     default:
       throw new Error(`Unknown action type: ${action.type}`)

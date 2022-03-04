@@ -39,7 +39,7 @@ export default function Home({ history }) {
   const authDispatch = useAuthDispatch()
   const messageDispatch = useMessageDispatch()
 
-  const { user } = useAuthState()
+  const { drUser } = useAuthState()
 
   const { data: messageData, error: messageError } = useSubscription(
     NEW_MESSAGE
@@ -54,12 +54,12 @@ export default function Home({ history }) {
 
     if (messageData) {
       const message = messageData.newMessage
-      const otherUser = user.username === message.to ? message.from : message.to
+      const otherDrUser = drUser.drusername === message.to ? message.from : message.to
 
       messageDispatch({
         type: 'ADD_MESSAGE',
         payload: {
-          username: otherUser,
+          drusername: otherDrUser,
           message,
         },
       })
@@ -71,15 +71,15 @@ export default function Home({ history }) {
 
     if (reactionData) {
       const reaction = reactionData.newReaction
-      const otherUser =
-        user.username === reaction.message.to
+      const otherDrUser =
+        drUser.drusername === reaction.message.to
           ? reaction.message.from
           : reaction.message.to
 
       messageDispatch({
         type: 'ADD_REACTION',
         payload: {
-          username: otherUser,
+          drusername: otherDrUser,
           reaction,
         },
       })

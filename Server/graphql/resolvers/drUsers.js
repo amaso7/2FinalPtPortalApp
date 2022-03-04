@@ -3,36 +3,36 @@ const { UserInputError, AuthenticationError } = require('apollo-server')
 const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
 
-const { Message, DrUser } = require('../../models')
+const { Message, Druser } = require('../../models')
 const { JWT_SECRET } = require('../../config/env.json')
 
 module.exports = {
   Query: {
-    getDrUsers: async (_, __, { drUser }) => {
+    getDrusers: async (_, __, { druser }) => {
       try {
-        if (!drUser) throw new AuthenticationError('Unauthenticated')
+        if (!druser) throw new AuthenticationError('Unauthenticated')
 
-        let drUsers = await DrUser.findAll({
+        let drusers = await Druser.findAll({
           attributes: ['drusername', 'imageUrl', 'createdAt'],
-          where: { drusername: { [Op.ne]: drUser.drusername } },
+          where: { drusername: { [Op.ne]: druser.drusername } },
         })
 
-        const allDrUserMessages = await Message.findAll({
+        const allDruserMessages = await Message.findAll({
           where: {
-            [Op.or]: [{ from: drUser.drusername }, { to: drUser.drusername }],
+            [Op.or]: [{ from: druser.drusername }, { to: druser.drusername }],
           },
           order: [['createdAt', 'DESC']],
         })
 
-        drUsers = drUsers.map((otherDrUser) => {
-          const latestMessage = allDrUserMessages.find(
-            (m) => m.from === otherDrUser.drusername || m.to === otherDrUser.drusername
+        drusers = drusers.map((otherDruser) => {
+          const latestMessage = allDruserMessages.find(
+            (m) => m.from === otherDruser.drusername || m.to === otherDruser.drusername
           )
-          otherDrUser.latestMessage = latestMessage
-          return otherDrUser
+          otherDruser.latestMessage = latestMessage
+          return otherDruser
         })
 
-        return drUsers
+        return druser
       } catch (err) {
         console.log(err)
         throw err
@@ -51,7 +51,7 @@ module.exports = {
           throw new UserInputError('bad input', { errors })
         }
 
-        const druser = await DrUser.findOne({
+        const druser = await Druser.findOne({
           where: { drusername },
         })
 
@@ -114,14 +114,14 @@ module.exports = {
         password = await bcrypt.hash(password, 6)
 
         // Create druser
-        const drUser = await DrUser.create({
+        const druser = await Druser.create({
           drusername,
           email,
           password,
         })
 
         // Return druser
-        return drUser
+        return druser
       } catch (err) {
         console.log(err)
         if (err.name === 'SequelizeUniqueConstraintError') {

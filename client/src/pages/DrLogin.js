@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { useAuthDispatch } from '../context/auth'
 
 const LOGIN_DRUSER = gql`
-  query drlogin($drusername: String!, $password: String!) {
+  query DrLogin($drusername: String!, $password: String!) {
     drlogin(drusername: $drusername, password: $password) {
       drusername
       email
@@ -25,10 +25,10 @@ export default function DrLogin(props) {
 
   const dispatch = useAuthDispatch()
 
-  const [loginDrUser, { loading }] = useLazyQuery(LOGIN_DRUSER, {
+  const [loginDruser, { loading }] = useLazyQuery(LOGIN_DRUSER, {
     onError: (err) => setErrors(err.graphQLErrors[0].extensions.errors),
     onCompleted(data) {
-      dispatch({ type: 'DRLOGIN', payload: data.drlogin })
+      dispatch({ type: 'LOGIN', payload: data.login })
       window.location.href = '/drHome'
     },
   })
@@ -36,7 +36,7 @@ export default function DrLogin(props) {
   const submitLoginForm = (e) => {
     e.preventDefault()
 
-    loginDrUser({ variables })
+    loginDruser({ variables })
   }
 
   return ( <Row className=" py-5 justify-content-center">

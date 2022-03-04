@@ -16,6 +16,7 @@ import DrLogin from './pages/DrLogin'
 import { AuthProvider } from './context/auth'
 import { MessageProvider } from './context/message'
 import DynamicRoute from './util/DynamicRoute'
+import DynamicRoute2 from './util/DynamicRoute2'
 
 function App() {
   return (
@@ -29,8 +30,8 @@ function App() {
                 <DynamicRoute path="/register" component={Register} guest />
                 <DynamicRoute path="/login" component={Login} guest />
                 <DynamicRoute path="/drregister" component={DrRegister} guest />
-                <DynamicRoute path="/drlogin" component={DrLogin} guest />
-                <DynamicRoute path="/drHome" component={DrHome} authenticated/>
+                <DynamicRoute2 path="/drlogin" component={DrLogin} guest />
+                <DynamicRoute2 path="/drHome" component={DrHome} authenticated/>
               </Switch>
             </Container>
           </BrowserRouter>

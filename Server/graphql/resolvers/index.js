@@ -1,7 +1,7 @@
 const userResolvers = require('./users')
 const messageResolvers = require('./messages')
-const druserResolvers = require('./drUsers')
-const { User, Message, DrUser } = require('../../models')
+const druserResolvers = require('./drusers')
+const { User, Message, Druser } = require('../../models')
 
 
 module.exports = {
@@ -11,19 +11,19 @@ module.exports = {
   Reaction: {
     createdAt: (parent) => parent.createdAt.toISOString(),
     message: async (parent) => await Message.findByPk(parent.messageId),
+    druser: async (parent) =>
+      await Druser.findByPk(parent.druserId, {
+        attributes: ['drusername', 'imageUrl', 'createdAt'],
+      }),
     user: async (parent) =>
       await User.findByPk(parent.userId, {
         attributes: ['username', 'imageUrl', 'createdAt'],
-      }),
-      druser: async (parent) =>
-      await DrUser.findByPk(parent.druserId, {
-        attributes: ['drusername', 'imageUrl', 'createdAt'],
       }),
   },
   User: {
     createdAt: (parent) => parent.createdAt.toISOString(),
   },
-  DrUser: {
+  Druser: {
     createdAt: (parent) => parent.createdAt.toISOString(),
   },
   Query: {

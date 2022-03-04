@@ -57,16 +57,16 @@ export default function Users() {
         >
           <Image
             src={
-              druser.imageUrl ||
+              user.imageUrl ||
               'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
             }
-            className="druser-image"
+            className="user-image"
           />
           <div className="d-none d-md-block ml-2">
-            <p className="text-success">{druser.drusername}</p>
+            <p className="text-success">{user.username}</p>
             <p className="font-weight-light">
-              {druser.latestMessage
-                ? druser.latestMessage.content
+              {user.latestMessage
+                ? user.latestMessage.content
                 : 'You are now connected!'}
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function Users() {
   }
   return (
     <Col xs={2} md={4} className="p-0 bg-secondary">
-      {drusersMarkup}
+      {usersMarkup}
     </Col>
   )
 }

@@ -17,6 +17,11 @@ module.exports = (context) => {
       context.user = decodedToken
     })
   }
+  if (token) {
+    jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+      context.druser = decodedToken
+    })
+  }
 
   context.pubsub = pubsub
 

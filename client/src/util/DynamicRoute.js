@@ -13,4 +13,5 @@ export default function DynamicRoute(props) {
   } else {
     return <Route component={props.component} {...props} />
   }
+
 }

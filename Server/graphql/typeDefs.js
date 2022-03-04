@@ -9,7 +9,7 @@ module.exports = gql`
     imageUrl: String
     latestMessage: Message
   }
-  type DrUser {
+  type Druser {
     drusername: String!
     email: String
     createdAt: String!
@@ -31,13 +31,13 @@ module.exports = gql`
     createdAt: String!
     message: Message!
     user: User!
-    druser: DrUser!
+    druser: Druser!
   }
   type Query {
     getUsers: [User]!
     login(username: String!, password: String!): User!
-    getDrUsers: [DrUser]!
-    drlogin(drusername: String!, password: String!): DrUser!
+    getDrusers: [Druser]!
+    drlogin(drusername: String!, password: String!): Druser!
     getMessages(from: String!): [Message]!
   }
   type Mutation {
@@ -52,7 +52,7 @@ module.exports = gql`
       email: String!
       password: String!
       confirmPassword: String!
-    ): DrUser!
+    ): Druser!
     sendMessage(to: String!, content: String!): Message!
     reactToMessage(uuid: String!, content: String!): Reaction!
   }
